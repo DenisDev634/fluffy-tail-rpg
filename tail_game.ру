@@ -1,0 +1,53 @@
+import random
+hunger = 50
+happiness = 50
+print ("привет! ты пушистый хвостик.твоя цель-выжить 5 дней!")
+for day in range (1,6):
+    print(f"День {day} Куда пойдешь?")
+    choice = input("1 кухня ,2 комната с хозяином,3 гулять на улице с другими хвостиками,4 пойти в магазин с хозяином")
+    if choice  == "1":
+        event = random.randint(0,1)
+        if event == 0:
+             print("мама угостила хвостика сыром (^o^)")
+             hunger += 20
+             happiness -= 10
+        else:
+            print("мама наступила на хвостика (>o<)")
+            happiness -= 20
+            hunger -= 10
+    elif choice == "2":
+        event = random.randint(0,1)
+        if event == 1:
+            print("хозяин почесал пузико хвостику (^0^)")
+            happiness += 20
+            hunger -= 10
+        else:
+            print("хозяин спал но забыл вкусняшку на столе (-_-)")
+            happiness -= 15
+            hunger += 15
+    elif choice == "3":
+        event = random.randint(0,1)
+        if event == 1:
+                    print("хвостик упал и поранился (0_0)")
+                    happiness -= 20
+                    hunger -= 10
+        else:
+        
+                    print("хвостик побегал с друзьями (^o^)")
+                    happiness += 25
+                    hunger -= 15hunger -= 1
+    elif choice == 	"4":
+        event = random.randint(0,1)
+        if event == 1:
+            print("хвостик пошел в магазин с хозяином и спокойно себя вел(=_=)")
+            hunger -= 10
+            happiness += 15
+        else:
+                  print("хвостик украл палку колбасы(>D<)")
+                  hunger += 10
+                  happiness -= 15
+    print(f" конец дня.Сытость{hunger}/Счастье:{happiness}")
+if hunger <= 0 or happiness <= 0:
+       print("хвостик проиграл")
+       exit()
+print("хвостик прожил 5 днtq и стал супер хвостиком")
