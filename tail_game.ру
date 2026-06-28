@@ -2,16 +2,20 @@ import random
 hunger = 50
 happiness = 50
 hp = 50
-print ("привет! ты пушистый хвостик.твоя цель-выжить 5 дней!")
+energy = 50
+boss_fought = 0
+print ("привет! ты пушистый хвостик.твоя цель-выжить 7 дней!")
 for day in range (1,6):
     print(f"День {day} Куда пойдешь?")
     print("1 кухня")
     print("2 комната с хозяином")
-    print("гулять на улице с другими хвостиками")
+    print("3 гулять на улице с другими хвостиками")
     print("4 пойти в магазин с хозяином")
     print("5 пойти в городской парк")
     print("6 пойти в ветеринарную клинику")
-    choice = input("Твой выбор:")
+    print("7 поспать в лежанке")
+    print("8 пойти в подвал")
+    choice = input("Твой выбор:").strip()
     if choice  == "1":
         event = random.randint(0,1)
         if event == 0:
@@ -44,18 +48,41 @@ for day in range (1,6):
             print("хвостик нашел игрушку под диваном")
             happiness += 20
     elif choice == "3":
-        event = random.randint(0,1)
-        if event == 1:
-                    print("хвостик упал и поранился (0_0)")
-                    happiness -= 15
-                    hunger -= 10
-                    hp -= 25
-        else:
+            event = random.randint(1,5)
+    if event == 1:
+                  print("хвостик упал и поранился (0_0)")
+                  happiness -= 15
+                  hunger -= 10
+                  hp -= 25
+                  energy -= 5
+    elif event > 2:
         
                     print("хвостик побегал с друзьями (^o^)")
                     happiness += 25
                     hunger -= 15
-    elif choice == 	"4":
+                    energy -= 15
+    elif event == 2 and boss_fought == 0:
+                    print("дорогу переградил злой соседкий кот")
+                    boss_fought = 1
+                    boss_choice = input ("1-принять бой,2 убежать")
+                    if boss_choice == "1":
+                                    boss_event = random.randint(0,1)
+                                    if boss_event == 1:
+                                            print("хвостик увернулся и нанес удар и соседский кот убежал")
+                                            happiness += 25
+                                            hunger -= 10
+                                            energy -= 20
+                                    else:
+                                     print("хвостик проиграл соседскому коту и убежал с плохим настроением")
+                                     happiness -= 25
+                                     energy -= 10
+                                     hp -= 25
+                    elif boss_choice == "2":
+                             print("хвостик включил турбо режим и убежал до дома")
+                             happiness -= 5
+                             hunger -= 15
+                             energy -= 25
+    elif choice == "4":
         event = random.randint(0,1)
         if event == 1:
             print("хвостик пошел в магазин с хозяином и спокойно себя вел(=_=)")
@@ -71,11 +98,13 @@ for day in range (1,6):
             print("хвостик встретил друзей в парке и его угостили вкусняшкой(^-^)")
             hunger += 10
             happiness += 20
+            energy -= 20
         else:
                       print("хвостик никого не встретил и на хвостика напала стая собак(T_T)")
                       hunger -= 5
                       happiness -= 0
                       hp -=40
+                      energy -= 15
     elif choice == "6":
         event = random.randint(0,1)
         if event == 1:
@@ -87,11 +116,34 @@ for day in range (1,6):
                       hunger += 10
                       happiness += 10
                       hp += 15
-    print(f" конец дня.Сытость{hunger}/Счастье:{happiness}/Здоровье:{hp}")
-    if hunger <= 0 or happiness <= 0 or hp <= 0:
+    elif choice == "7":
+        event = random.randint(0,1)
+        if event == 1:
+                      print("хвостик крепко поспал")
+                      happiness += 10
+                      energy += 25
+        else:
+                      print("хвостику приснился страшный сон")
+                      happiness -= 15
+                      energy += 15
+    elif choice == "8":
+        event = random.randint(0,1)
+        if event == 1:
+                      print("хвостик увидел мышку и поймал её")
+                      hunger += 5
+                      happiness += 15
+                      energy -= 15
+        else:
+                      print("хвостик увидел два светящихся глаза и убежал и по пути ударился")
+                      happiness -= 20
+                      hp -= 15
+                      energy -=15
+                      
+    print(f" конец дня.Сытость{hunger}/Счастье:{happiness}/Здоровье:{hp}/Энергия:{energy}")
+    if hunger <= 0 or happiness <= 0 or hp <= 0 or energy <= 0:
        print("хвостик проиграл")
        exit()
-print("хвостик прожил 5 дней и стал супер хвостиком")
+print("хвостик прожил 7 дней и стал супер хвостиком")
 final = input("ты нашел золотой ошейник!1-надеть,2-отдать хозяину").strip()
 if final == "1":
         print("ты стал королем хвостиков")
